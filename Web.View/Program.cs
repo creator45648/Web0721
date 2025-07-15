@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Web.View;
 
 public class Program
@@ -9,6 +11,11 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddRazorPages();
+
+        //ª`¤JNorthwindContext
+        builder.Services.AddDbContext<Models.NorthwindContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindContext") 
+            ?? throw new InvalidOperationException("Connection string 'NorthwindContext' not found.")));
 
         var app = builder.Build();
 
