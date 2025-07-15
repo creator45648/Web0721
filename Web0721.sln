@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "方案項目", "方案項目", "{8DDC4786-5FC8-F15C-1CA5-9F41FD4BEB75}"
 	ProjectSection(SolutionItems) = preProject
 		instnwnd.sql = instnwnd.sql
+		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
 Global
