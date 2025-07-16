@@ -1,0 +1,614 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ToDo API",
+    "description": "An ASP.NET Core Web API for managing ToDo items",
+    "termsOfService": "https://example.com/terms",
+    "contact": {
+      "name": "Example Contact",
+      "url": "https://example.com/contact"
+    },
+    "license": {
+      "name": "Example License",
+      "url": "https://example.com/license"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Customer": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "GetAllCustomers",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customer"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "CreateCustomer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      }
+    },
+    "/api/Customer/{id}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "GetCustomerById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customerid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "UpdateCustomer",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customerid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "DeleteCustomer",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "customerid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Category": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "categoryName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "picture": {
+          "format": "byte",
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactTitle": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "customerTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerDemographic"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomerDemographic": {
+      "type": "object",
+      "properties": {
+        "customerTypeId": {
+          "type": "string"
+        },
+        "customerDesc": {
+          "type": "string"
+        },
+        "customers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Customer"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Employee": {
+      "type": "object",
+      "properties": {
+        "employeeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "titleOfCourtesy": {
+          "type": "string"
+        },
+        "birthDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hireDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "homePhone": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "photo": {
+          "format": "byte",
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "reportsTo": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "photoPath": {
+          "type": "string"
+        },
+        "inverseReportsToNavigation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Employee"
+          }
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "reportsToNavigation": {
+          "$ref": "#/definitions/Employee"
+        },
+        "territories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Territory"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "employeeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "orderDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "requiredDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "shippedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "shipVia": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "freight": {
+          "format": "double",
+          "type": "number"
+        },
+        "shipName": {
+          "type": "string"
+        },
+        "shipAddress": {
+          "type": "string"
+        },
+        "shipCity": {
+          "type": "string"
+        },
+        "shipRegion": {
+          "type": "string"
+        },
+        "shipPostalCode": {
+          "type": "string"
+        },
+        "shipCountry": {
+          "type": "string"
+        },
+        "customer": {
+          "$ref": "#/definitions/Customer"
+        },
+        "employee": {
+          "$ref": "#/definitions/Employee"
+        },
+        "orderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDetail"
+          }
+        },
+        "shipViaNavigation": {
+          "$ref": "#/definitions/Shipper"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OrderDetail": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "productId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "unitPrice": {
+          "format": "double",
+          "type": "number"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "discount": {
+          "format": "float",
+          "type": "number"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "supplierId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "categoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "quantityPerUnit": {
+          "type": "string"
+        },
+        "unitPrice": {
+          "format": "double",
+          "type": "number"
+        },
+        "unitsInStock": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "unitsOnOrder": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "reorderLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "discontinued": {
+          "type": "boolean"
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "orderDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDetail"
+          }
+        },
+        "supplier": {
+          "$ref": "#/definitions/Supplier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Region": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "regionDescription": {
+          "type": "string"
+        },
+        "territories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Territory"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Shipper": {
+      "type": "object",
+      "properties": {
+        "shipperId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Supplier": {
+      "type": "object",
+      "properties": {
+        "supplierId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactTitle": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "homePage": {
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Territory": {
+      "type": "object",
+      "properties": {
+        "territoryId": {
+          "type": "string"
+        },
+        "territoryDescription": {
+          "type": "string"
+        },
+        "regionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "region": {
+          "$ref": "#/definitions/Region"
+        },
+        "employees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Employee"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
